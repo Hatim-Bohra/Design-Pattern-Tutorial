@@ -8,11 +8,12 @@ interface EdgeProps {
     start: { x: number; y: number };
     end: { x: number; y: number };
     animated?: boolean;
+    dashed?: boolean;
     label?: string;
     color?: string;
 }
 
-export const Edge: React.FC<EdgeProps> = ({ start, end, animated, label, color = "#cbd5e1" }) => {
+export const Edge: React.FC<EdgeProps> = ({ start, end, animated, dashed, label, color = "#cbd5e1" }) => {
     return (
         <g>
             {/* Base Line */}
@@ -24,6 +25,7 @@ export const Edge: React.FC<EdgeProps> = ({ start, end, animated, label, color =
                 stroke={color}
                 strokeWidth="4"
                 strokeLinecap="round"
+                strokeDasharray={dashed ? "8,8" : undefined}
             />
 
             {/* Animated Flow Packet */}
