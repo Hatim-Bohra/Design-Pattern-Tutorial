@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { SvgCanvas } from "@/components/shared/demo-framework/SvgCanvas";
 import { Node } from "@/components/shared/demo-framework/Node";
 import { Edge } from "@/components/shared/demo-framework/Edge";

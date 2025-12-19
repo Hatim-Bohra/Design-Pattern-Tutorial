@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { RefreshCw, Code2, Play } from "lucide-react";
-import { clsx } from "clsx";
+import { RefreshCw } from "lucide-react";
 
 interface DemoShellProps {
   children: React.ReactNode;

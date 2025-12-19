@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { clsx } from "clsx";
-import { Code2, Play, TestTube } from "lucide-react";
 
 interface Tab {
   id: string;

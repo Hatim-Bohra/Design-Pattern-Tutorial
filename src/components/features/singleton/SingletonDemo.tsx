@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { SvgCanvas } from "@/components/shared/demo-framework/SvgCanvas";
 import { Node } from "@/components/shared/demo-framework/Node";
 import { Edge } from "@/components/shared/demo-framework/Edge";
@@ -69,12 +69,6 @@ export const SingletonDemo = () => {
     clientA: { x: 200, y: 400, label: "Client Window A" },
     clientB: { x: 600, y: 400, label: "Client Window B" },
   };
-
-  // Derived visual styles
-  const getNodeStyle = (theme: "DARK" | "LIGHT") =>
-    theme === "DARK"
-      ? "fill-slate-800 stroke-slate-600 text-white"
-      : "fill-blue-50 stroke-blue-500 text-blue-900";
 
   return (
     <DemoShell

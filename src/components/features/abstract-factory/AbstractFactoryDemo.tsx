@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { SvgCanvas } from "@/components/shared/demo-framework/SvgCanvas";
-import { Node } from "@/components/shared/demo-framework/Node";
+
 import { DemoShell } from "@/components/shared/DemoShell";
 import { motion } from "framer-motion";
 import { clsx } from "clsx";
@@ -15,13 +15,6 @@ export const AbstractFactoryDemo = () => {
     btn: { x: 250, y: 350, label: "Button" },
     chk: { x: 550, y: 350, label: "Checkbox" },
   };
-
-  const styles = {
-    LIGHT: { bg: "bg-white", text: "text-slate-900", border: "border-slate-300" },
-    DARK: { bg: "bg-slate-800", text: "text-white", border: "border-slate-600" },
-  };
-
-  const currentStyle = styles[theme];
 
   return (
     <DemoShell

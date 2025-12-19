@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 
 export function ScrollToTop() {

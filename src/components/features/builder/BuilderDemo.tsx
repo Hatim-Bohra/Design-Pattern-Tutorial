@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { SvgCanvas } from "@/components/shared/demo-framework/SvgCanvas";
 import { Node } from "@/components/shared/demo-framework/Node";
-import { Edge } from "@/components/shared/demo-framework/Edge";
+
 import { LoggerPanel, LogEntry } from "@/components/shared/demo-framework/LoggerPanel";
 import { DemoShell } from "@/components/shared/DemoShell";
 import { motion } from "framer-motion";
@@ -24,8 +24,6 @@ export const BuilderDemo = () => {
     setQuery((prev) => ({ ...prev, [part]: value }));
     addLog(`Builder: .${part}('${value}')`);
   };
-
-  const finalQuery = `SELECT ${query.select} FROM ${query.from} ${query.where ? `WHERE ${query.where}` : ""};`;
 
   return (
     <DemoShell

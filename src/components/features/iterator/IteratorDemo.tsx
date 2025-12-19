@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { SvgCanvas } from "@/components/shared/demo-framework/SvgCanvas";
 import { Node } from "@/components/shared/demo-framework/Node";
-import { Edge } from "@/components/shared/demo-framework/Edge";
+
 import { DemoShell } from "@/components/shared/DemoShell";
 import { motion } from "framer-motion";
 

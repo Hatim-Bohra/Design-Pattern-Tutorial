@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { SvgCanvas } from "@/components/shared/demo-framework/SvgCanvas";
 import { Node } from "@/components/shared/demo-framework/Node";
 import { Edge } from "@/components/shared/demo-framework/Edge";
@@ -46,7 +46,8 @@ export const MediatorDemo = () => {
       if (isSelfLanded) {
         // Taking off
         setRunwayFree(true);
-        planeId === "P1" ? setP1Status("Flying") : setP2Status("Flying");
+        if (planeId === "P1") setP1Status("Flying");
+        else setP2Status("Flying");
 
         // Broadcast Clearance
         setActivePacket({ from: "Tower", to: "All", color: "#22c55e" });
@@ -55,13 +56,15 @@ export const MediatorDemo = () => {
         // Trying to land
         if (runwayFree) {
           setRunwayFree(false);
-          planeId === "P1" ? setP1Status("Landed") : setP2Status("Landed");
+          if (planeId === "P1") setP1Status("Landed");
+          else setP2Status("Landed");
 
           // Broadcast Block
           setActivePacket({ from: "Tower", to: "All", color: "#22c55e" }); // Green for success msg
           addLog(`Tower: Granted ${planeName}. Others must HOLD.`);
         } else {
-          planeId === "P1" ? setP1Status("Waiting") : setP2Status("Waiting");
+          if (planeId === "P1") setP1Status("Waiting");
+          else setP2Status("Waiting");
 
           // Broadcast Reject
           setActivePacket({ from: "Tower", to: planeId, color: "#ef4444" });
