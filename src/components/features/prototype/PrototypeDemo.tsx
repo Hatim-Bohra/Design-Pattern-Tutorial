@@ -9,7 +9,7 @@ import { DemoShell } from "@/components/shared/DemoShell";
 interface ShapeProps {
   id: string;
   type: "CIRCLE" | "RECT";
-  color: string;
+  color: "red" | "blue";
   x: number;
   y: number;
 }
@@ -20,7 +20,7 @@ export const PrototypeDemo = () => {
   ]);
   const [selectedId, setSelectedId] = useState<string>("orig");
 
-  const cloneShape = () => {
+  const cloneShape = React.useCallback(() => {
     const original = shapes.find((s) => s.id === selectedId);
     if (!original) return;
 
@@ -29,11 +29,22 @@ export const PrototypeDemo = () => {
       id: Math.random().toString(),
       x: original.x + 100,
       y: original.y + (Math.random() * 50 - 25), // Slight offset
-      color: original.color === "red" ? "blue" : "red", // Just to differentiate visually if needed, but logic is cloning
+      color: original.color === "red" ? "blue" : "red",
     };
     setShapes([...shapes, newShape]);
     setSelectedId(newShape.id);
-  };
+  }, [shapes, selectedId]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "c") {
+        e.preventDefault();
+        cloneShape();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [cloneShape]);
 
   return (
     <DemoShell
@@ -64,20 +75,41 @@ export const PrototypeDemo = () => {
                   label={s.type}
                   selected={selectedId === s.id}
                   onClick={() => setSelectedId(s.id)}
+                  className={
+                    s.color === "red"
+                      ? "fill-rose-100 stroke-rose-500 text-rose-900"
+                      : "fill-blue-100 stroke-blue-500 text-blue-900"
+                  }
+                  initial={
+                    prevShape
+                      ? { x: prevShape.x, y: prevShape.y, opacity: 0, scale: 0.5 }
+                      : { x: s.x, y: s.y, scale: 0 }
+                  }
+                  animate={{ x: s.x, y: s.y, opacity: 1, scale: 1 }}
                 />
               </React.Fragment>
             );
           })}
+        </SvgCanvas>
 
-          <div className="absolute top-4 left-4">
+        <div className="absolute top-4 left-4 flex flex-col gap-2 pointer-events-auto">
+          <div className="bg-white/80 p-3 rounded-lg shadow border border-slate-100 backdrop-blur-sm">
+            <div className="text-xs font-bold text-slate-500 mb-1 pointer-events-none select-none">
+              PROTOTYPE REGISTRY
+            </div>
             <button
+              type="button"
               onClick={cloneShape}
-              className="bg-slate-900 text-white px-4 py-2 rounded shadow"
+              className="bg-slate-900 text-white px-4 py-2 rounded shadow font-bold text-sm hover:scale-105 transition-transform active:scale-95 flex items-center gap-2"
             >
-              Clone Selected
+              <span>Clone Selected</span>
+              <span className="opacity-50 text-xs font-normal">(Ctrl+C)</span>
             </button>
           </div>
-        </SvgCanvas>
+          <div className="text-[10px] text-slate-400 max-w-[150px] leading-tight select-none">
+            Select a node to clone it. The new instance copies the state of the prototype.
+          </div>
+        </div>
       </div>
     </DemoShell>
   );

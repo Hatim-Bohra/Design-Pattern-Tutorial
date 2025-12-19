@@ -3,9 +3,11 @@ import { Metadata } from "next";
 import { SingletonDemo } from "@/components/features/singleton/SingletonDemo";
 import { CodeTabs } from "@/components/shared/CodeTabs";
 import { patterns } from "@/lib/registry";
-import { Database, Server } from "lucide-react";
+import { prosConsData } from "@/lib/pattern-content";
+import { Database, Server } from "lucide-react"; // Added Info icon
 import { PatternHeader } from "@/components/shared/pattern-layout/PatternHeader";
 import { PatternSection } from "@/components/shared/pattern-layout/PatternSection";
+import { ProsConsList } from "@/components/shared/pattern-layout/ProsConsList";
 
 export const dynamic = "force-static";
 
@@ -15,12 +17,13 @@ export const metadata: Metadata = {
 };
 
 const pattern = patterns.find((p) => p.slug === "singleton");
+const content = prosConsData["singleton"];
 
 export default function SingletonPage() {
   if (!pattern) return <div>Pattern not found</div>;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12 space-y-16">
+    <div className="max-w-4xl mx-auto px-6 py-12 space-y-12">
       <PatternHeader
         title={pattern.title}
         description={pattern.description}
@@ -69,10 +72,14 @@ export default function SingletonPage() {
       <PatternSection title="The Solution">
         <p>
           The <strong>Singleton Pattern</strong> restricts a class to a single instance and provides
-          a global access point to it.
+          a global access point to it. Ideally, you want to:
         </p>
-        <div className="bg-white border rounded-xl p-6 shadow-sm flex flex-col items-center not-prose mt-4">
-          <svg width="400" height="200" viewBox="0 0 400 200">
+        <ol className="list-decimal list-inside space-y-1 ml-4 mt-2">
+          <li>Ensure that a class has just a single instance.</li>
+          <li>Provide a global access point to that instance.</li>
+        </ol>
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col items-center not-prose mt-6 dark:bg-slate-800 dark:border-slate-700">
+          <svg width="400" height="200" viewBox="0 0 400 200" className="max-w-full h-auto">
             <rect
               x="100"
               y="20"
@@ -102,11 +109,20 @@ export default function SingletonPage() {
               strokeDasharray="4"
               markerEnd="url(#arrow)"
             />
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#6366f1" />
+              </marker>
+            </defs>
           </svg>
         </div>
       </PatternSection>
 
       <PatternSection title="Interactive Playground">
+        <p className="mb-4">
+          In this demo, observe how the <strong>Global Config</strong> state is shared across
+          multiple windows (Client A and Client B) when Singleton mode is active.
+        </p>
         <SingletonDemo />
       </PatternSection>
 
@@ -130,6 +146,12 @@ export default function SingletonPage() {
           ]}
         />
       </PatternSection>
+
+      {content && (
+        <PatternSection title="Pros & Cons">
+          <ProsConsList pros={content.pros} cons={content.cons} />
+        </PatternSection>
+      )}
     </div>
   );
 }
