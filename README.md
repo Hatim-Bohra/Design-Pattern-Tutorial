@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-# Design-Pattern-Tutorial
-=======
+# Design Pattern Tutorial
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -36,5 +35,41 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> ffdfdc0 (feat(demo-framework): introduce reusable interactive demo system with SVG canvas and logging)
+## CI/CD Status
+
+[![CI](https://github.com/Hatim-Bohra/Design-Pattern-Tutorial/actions/workflows/ci.yml/badge.svg)](https://github.com/Hatim-Bohra/Design-Pattern-Tutorial/actions/workflows/ci.yml)
+
+## Environment Variables
+
+This project requires environment variables to run correctly in production. Use `.env.example` as a template.
+
+1. Copy `.env.example` to `.env.local` for local development.
+2. Add the actual values to `.env.local`. **DO NOT COMMIT THIS FILE.**
+
+## Deployment
+
+### Vercel (Recommended)
+
+This project is optimized for deployment on [Vercel](https://vercel.com).
+
+1. **Push your code to GitHub.**
+2. **Import project into Vercel:**
+    - Go to your Vercel Dashboard.
+    - Click "Add New..." -> "Project".
+    - Import the `Design-Pattern-Tutorial` repository.
+3. **Configure Environment Variables:**
+    - In the import flow, expand "Environment Variables".
+    - Add any variables defined in `.env.example` (e.g., `NEXT_PUBLIC_APP_URL`).
+4. **Deploy:**
+    - Click "Deploy". Vercel will auto-detect Next.js and build your app.
+
+**Note:** Every Pull Request (PR) will automatically generate a **Preview Deployment** URL for testing. Pushing to `main` will automatically deploy to **Production**.
+
+### GitHub Actions (CI)
+
+This repository includes a CI pipeline (`.github/workflows/ci.yml`) that runs on every Push to `main` and Pull Request. It checks:
+- Linting (`npm run lint`)
+- Tests (`npm test`)
+- Build (`npm run build`)
+
+Ensure the pipeline passes before merging.

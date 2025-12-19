@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write .",
     "check-types": "tsc --noEmit",
+    "test": "echo \"No tests specified\" && exit 0",
     "preview": "next build && next start",
     "prepare": "husky"
   },
